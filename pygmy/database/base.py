@@ -48,6 +48,7 @@ class BaseDatabase:
         engine = os.environ.get('DB_ENGINE') or config.database['engine']
 
         self._db_url = config.database['url']
+        log.info('initial _db_url=%s', self._db_url)
         if engine == 'sqlite3':
             return self._db_url
 
