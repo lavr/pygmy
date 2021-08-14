@@ -62,8 +62,8 @@ class BaseDatabase:
                 os.environ.get('DB_NAME'))
 
         if any([host, port, user, password, db_name]):
-            log.info('Replacing config value by environment variable: %s',
-                     [engine, host, port, user, password, db_name])
+            log.info('%s Replacing config value by environment variable: %s',
+                     [self.__class__, engine, host, port, user, password, db_name])
 
         url_kw_params = {
             'engine': engine,
@@ -73,6 +73,7 @@ class BaseDatabase:
             'port': port or config.database['port'],
             'db_name': db_name or config.database['db_name']
         }
+        log.debug('db url data: %s', url_kw_params)
         try:
             self._db_url = self._db_url.format(**url_kw_params)
         except KeyError as err:
