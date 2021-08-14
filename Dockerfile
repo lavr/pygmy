@@ -6,6 +6,7 @@ LABEL description='Pygmy(pygy.co) URL shortener'
 LABEL vendor="Amit Tripathi"
 
 RUN apt update && apt install python3-pip -y
+RUN apt install libpq-dev gcc -y
 RUN mkdir /var/log/pygmy
 
 WORKDIR /pygmy
