@@ -63,7 +63,7 @@ class BaseDatabase:
 
         if any([host, port, user, password, db_name]):
             log.info('%s Replacing config value by environment variable: %s',
-                     [self.__class__, engine, host, port, user, password, db_name])
+                     self.__class__, [engine, host, port, user, password, db_name])
 
         url_kw_params = {
             'engine': engine,
@@ -79,6 +79,8 @@ class BaseDatabase:
         except KeyError as err:
             # Raised if one of the config is not passed
             raise KeyError('Key: {} not set in config file'.format(err))
+
+        return self._db_url
 
 
     def initialize(self, debug=False):
