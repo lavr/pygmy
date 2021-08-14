@@ -1,3 +1,5 @@
+import os
+
 from pygmy.model import *
 from pygmy.config import config
 from pygmy.database.sqlite import SqliteDatabase
@@ -12,11 +14,12 @@ class DatabaseFactory:
     def create():
         """Get db class from config.db.engine"""
         # TODO: make a utli.mapping
-        if config.database['engine'] == 'sqlite3':
+        engine = os.environ.get('DB_ENGINE') or config.database['engine']
+        if engine == 'sqlite3':
             database = SqliteDatabase()
-        elif config.database['engine'] == 'postgresql':
+        elif engine == 'postgresql':
             database = PostgreSQLDatabase()
-        elif config.database['engine'] == 'mysql':
+        elif engine == 'mysql':
             database = MySQLDatabase()
         else:
             raise Exception(

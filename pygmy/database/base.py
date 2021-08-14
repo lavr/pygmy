@@ -32,6 +32,7 @@ class BaseDatabase:
         """Gets the url from config file pygmy.cfg and then look up for
         following enviorment variable. If found, replcases the values
 
+        - DB_ENGINE
         - DB_HOST
         - DB_PORT
         - DB_USER
