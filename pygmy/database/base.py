@@ -44,16 +44,15 @@ class BaseDatabase:
         if self._db_url is not None:
             return self._db_url
 
+        engine = os.environ.get('DB_ENGINE') or config.database['engine']
+
         self._db_url = config.database['url']
-        if config.database['engine'] == 'sqlite3':
+        if engine == 'sqlite3':
             return self._db_url
 
         # As in case of mysql we use pymysql, modify engine here
-        if config.database['engine'] == 'mysql':
+        if engine == 'mysql':
             engine = 'mysql+pymysql'
-        else:
-            engine = config.database['engine']
-
 
         # Get environment variables
         host, port, user, password, db_name = (
