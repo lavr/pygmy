@@ -62,7 +62,8 @@ class BaseDatabase:
                 os.environ.get('DB_NAME'))
 
         if any([host, port, user, password, db_name]):
-            log.info('Replacing config value by environment variable')
+            log.info('Replacing config value by environment variable: %s',
+                     [engine, host, port, user, password, db_name])
 
         url_kw_params = {
             'engine': engine,
