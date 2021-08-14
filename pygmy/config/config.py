@@ -53,7 +53,8 @@ class Configuration:
         self.webservice_url = "{0}://{1}:{2}".format(
             self.schema, self.host, self.port)
 
-        if self.database['engine'] == 'sqlite3':
+        engine = os.environ.get('DB_ENGINE') or self.database['engine']
+        if engine == 'sqlite3':
             root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
             data_dir = self.database.get('sqlite_data_dir') or 'data'
             file_name = self.database.get('sqlite_db_file_name') or 'pygmy.db'
