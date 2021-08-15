@@ -86,8 +86,6 @@ class BaseDatabase:
 
     def initialize(self, debug=False):
         log.info('{} DB URL: {}'.format(self.__class__.__name__, self.db_url))
-        if 'sqlite' in  self.db_url:
-            raise
         self._prepare(self.db_url)
         self.engine = create_engine(self.db_url, echo=debug)
         session = sessionmaker(bind=self.engine)
