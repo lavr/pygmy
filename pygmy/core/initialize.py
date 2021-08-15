@@ -2,15 +2,17 @@ import sys
 import os
 
 from pygmy.config import config
+from pygmy.config.config import _CONFIG_ENV_VAR
 from pygmy.database.factory import DatabaseFactory
 
-_CONFIG_ENV_VAR = 'PYGMY_CONFIG_FILE'
 _CFG_PATHS = ['pygmy/config/pygmy.cfg', 'pygmy.cfg',
               '$HOME/.pygmy.cfg', '/etc/pygmy.cfg'
               'tests/pygmy_test.cfg', 'pygmy/config/pygmy_test.cfg']
 
 
 def load_config_path(config_path=None):
+    if not config_path and os.environ.get(_CONFIG_ENV_VAR):
+        return
     if config_path and os.path.exists(config_path):
         os.environ[_CONFIG_ENV_VAR] = config_path
         return
